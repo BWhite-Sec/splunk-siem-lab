@@ -1,0 +1,32 @@
+// Detection: Brute-Force Followed by Successful Logon (Confirmed Compromise)
+// MITRE ATT&CK: T1110.001 - Password Guessing
+// Description: Flags a successful logon (4624) that was immediately preceded
+//              by 3 or more failed logon attempts (4625) on the same
+//              account within a rolling window. Higher fidelity than a
+//              simple failed-logon spike, since it isolates cases where the
+//              brute-force actually succeeded rather than just noisy
+//              scanning.
+//
+// NOTE: Account names are normalized with lower() because Windows logs the
+//       same account with inconsistent casing across event types (observed:
+//       "WindowsVic" on 4624 success events vs. "windowsvic" on 4625
+//       failure events). Without normalization, SPL's case-sensitive field
+//       comparisons silently split one account's activity into two groups
+//       and the correlation logic below returns zero results.
+//
+// Data source: WinEventLog (Windows Security log), EventCode 4624 / 4625
+
+index=main sourcetype=WinEventLog (EventCode=4625 OR EventCode=4624)
+| eval user=lower(user)
+| eval status=case(EventCode=4625, "failed", EventCode=4624, "success")
+| sort 0 _time
+| streamstats current=t window=10 count(eval(status="failed")) as failed_count by user
+| eval failed_count=if(isnull(failed_count),0,failed_count)
+| where status="success" AND failed_count>=3
+| table _time, user, failed_count, status
+
+// --- Alert configuration used in this lab ---
+// Schedule:          Cron */5 * * * * (every 5 minutes)
+// Trigger condition:  Number of results > 0
+// Trigger action:     Add to Triggered Alerts
+// Severity:           High (indicates confirmed compromise, not just scanning)

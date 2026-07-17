@@ -1,0 +1,13 @@
+// Detection: Failed Logon Spike (Volumetric Brute-Force Indicator)
+// MITRE ATT&CK: T1110 - Brute Force
+// Description: Flags accounts with 3+ failed SSH/Windows logon attempts
+//              within a 5-minute window. Lower-fidelity than the
+//              bruteforce_success detection; useful for catching scanning
+//              activity even when no compromise occurs.
+// Data source: WinEventLog (Windows Security log), EventCode 4625
+
+index=main sourcetype=WinEventLog EventCode=4625
+| eval user=lower(user)
+| bucket _time span=5m
+| stats count as failed_attempts by _time, user
+| where failed_attempts >= 3
