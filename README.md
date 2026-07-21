@@ -98,7 +98,6 @@ detects it using custom SPL correlation searches mapped to MITRE ATT&CK.
                   - [ ] - [ ] Add source-IP correlation to reduce false positives on the brute-force detection
                   - [ ] - [ ] Build a Splunk dashboard for failed logons / alert volume
                  
-                  - [ ] ## Author
-                 
-                  - [ ] Brandon White — [LinkedIn](https://www.linkedin.com/in/brandon-white-b62701177)
-                  - [ ] 
+              ## Author
+                 Brandon White — [LinkedIn](https://www.linkedin.com/in/brandon-white-b62701177)
+               
