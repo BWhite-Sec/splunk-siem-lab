@@ -1,8 +1,11 @@
 # Incident Report: Detecting Obfuscated PowerShell Execution via Script Block Logging
 
 **Author:** Brandon White
+
 **Lab environment:** Windows 11 (victim-win11) -> Splunk Universal Forwarder -> Splunk Indexer (splunk-siem)
+
 **Date:** July 2026
+
 **Related project:** [splunk-siem-lab](https://github.com/BWhite-Sec/splunk-siem-lab)
 
 ---
