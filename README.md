@@ -78,18 +78,16 @@ detects it using custom SPL correlation searches mapped to MITRE ATT&CK.
             A couple of real debugging findings worth calling out (documented in full in
             the incident report):
 
-            - **Case-sensitivity bug**: Windows logs the same account with inconsistent casing across event types (`WindowsVic` on success events vs. `windowsvic` on failures). Since SPL field comparisons are case-sensitive,
-              this silently split correlation results until normalized with `lower()`.
+            - **Case-sensitivity bug**: Windows logs the same account with inconsistent casing across event types (`WindowsVic` on success events vs. `windowsvic` on failures). Since SPL field comparisons are case-sensitive, this silently split correlation results until normalized with `lower()`.
             -  **Sourcetype shift after TA install**: installing the Splunk Add-on for Microsoft Windows changed how incoming events were classified (`WinEventLog:Security` → `WinEventLog`), which broke existing searches until identified via `| stats count by sourcetype`.
-              - **Windows Event Log ACL permissions**: the Universal Forwarder's virtual service account (`NT SERVICE\SplunkForwarder`) initially lacked permission to subscribe to the Sysmon Operational log channel (`errorCode=5`),
-             resolved by adding it to the local `Event Log Readers` group.
+            - **Windows Event Log ACL permissions**: the Universal Forwarder's virtual service account (`NT SERVICE\SplunkForwarder`) initially lacked permission to subscribe to the Sysmon Operational log channel (`errorCode=5`), resolved by adding it to the local `Event Log Readers` group.
                
             ## Next Steps / Roadmap
                
             - [x] Add LSASS access detection (Sysmon Event ID 10) for credential dumping (T1003.001) — see [report](reports/lsass-detection/lsass-credential-access-detection.md)
             - [x] Add PowerShell script block logging detection (Event ID 4104) — see [report](powershell-detection-lab/powershell-detection-incident-report.md)
-            - [ ] - [ ] Add source-IP correlation to reduce false positives on the brute-force detection
-            - [ ] - [ ] Build a Splunk dashboard for failed logons / alert volume
+            - [ ] Add source-IP correlation to reduce false positives on the brute-force detection
+            - [ ] Build a Splunk dashboard for failed logons / alert volume
                  
               ## Author
                  Brandon White — [LinkedIn](https://www.linkedin.com/in/brandon-white-b62701177)
