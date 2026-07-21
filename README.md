@@ -94,7 +94,7 @@ detects it using custom SPL correlation searches mapped to MITRE ATT&CK.
                 - ## Next Steps / Roadmap
                
                 - - [x] Add LSASS access detection (Sysmon Event ID 10) for credential dumping (T1003.001) — see [report](reports/lsass-detection/lsass-credential-access-detection.md)
-                  - [ ] - [ ] Add PowerShell script block logging detection (Event ID 4104)
+                  - [x] Add PowerShell script block logging detection (Event ID 4104) — see [report](powershell-detection-lab/powershell-detection-incident-report.md)
                   - [ ] - [ ] Add source-IP correlation to reduce false positives on the brute-force detection
                   - [ ] - [ ] Build a Splunk dashboard for failed logons / alert volume
                  
