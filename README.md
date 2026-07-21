@@ -22,19 +22,19 @@ detects it using custom SPL correlation searches mapped to MITRE ATT&CK.
 ## Architecture
 
 ```
-┌────────────────────┐         ┌────────────────────┐
-│     Kali Linux       │         │   Windows 11 Victim   │
-│     (Attacker)        │───────▶│   - Sysmon             │
-│     Hydra brute-force │  SSH   │   - OpenSSH Server     │
-│                       │  :22   │   - Universal Forwarder│
-└─────────────────────┘         └───────────┬───────────┘
-                                             │ TCP 9997
-                                             ▼
-                                 ┌──────────────────────┐
-                                 │    Ubuntu Server       │
-                                 │    Splunk Enterprise   │
-                                 │  (Indexer + Search Head)│
-                                 └──────────────────────┘
+┌────────────────────┐        ┌────────────────────────┐
+│    Kali Linux      │        │   Windows 11 Victim    │
+│    (Attacker)      │ ─────▶ │  - Sysmon              │
+│  Hydra brute-force │  SSH   │  - OpenSSH Server      │
+│                    │  :22   │  - Universal Forwarder │
+└────────────────────┘        └───────────┬────────────┘
+                                          │ TCP 9997
+                                          ▼
+                                 ┌─────────────────────────┐
+                                 │    Ubuntu Server        │
+                                 │    Splunk Enterprise    │
+                                 │ (Indexer + Search Head) │
+                                 └─────────────────────────┘
 ```
 
 All VMs run on a VirtualBox host-only network, isolated from the host machine's
