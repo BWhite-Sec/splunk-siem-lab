@@ -80,8 +80,7 @@ detects it using custom SPL correlation searches mapped to MITRE ATT&CK.
 
             - **Case-sensitivity bug**: Windows logs the same account with inconsistent casing across event types (`WindowsVic` on success events vs. `windowsvic` on failures). Since SPL field comparisons are case-sensitive,
               this silently split correlation results until normalized with `lower()`.
-            -  **Sourcetype shift after TA install**: installing the Splunk Add-on for
-              - Microsoft Windows changed how incoming events were classified (`WinEventLog:Security` → `WinEventLog`), which broke existing searches until identified via `| stats count by sourcetype`.
+            -  **Sourcetype shift after TA install**: installing the Splunk Add-on for Microsoft Windows changed how incoming events were classified (`WinEventLog:Security` → `WinEventLog`), which broke existing searches until identified via `| stats count by sourcetype`.
               - **Windows Event Log ACL permissions**: the Universal Forwarder's virtual service account (`NT SERVICE\SplunkForwarder`) initially lacked permission to subscribe to the Sysmon Operational log channel (`errorCode=5`),
              resolved by adding it to the local `Event Log Readers` group.
                
