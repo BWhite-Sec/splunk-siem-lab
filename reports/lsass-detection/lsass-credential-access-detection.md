@@ -1,9 +1,13 @@
 # Incident Report: LSASS Credential Access Detection
 
 **Project:** Splunk SIEM Home Lab
+
 **Detection Focus:** OS Credential Dumping — LSASS Memory
+
 **MITRE ATT&CK Technique:** [T1003.001 – OS Credential Dumping: LSASS Memory](https://attack.mitre.org/techniques/T1003/001/)
+
 **Author:** Brandon White
+
 **Environment:** `victim-win11` (Windows 11 VM) → Sysmon → Universal Forwarder → Splunk
 
 ---
